@@ -1,0 +1,35 @@
+{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Detalles del Docente</title>
+</head>
+<body>
+    <h1>Detalles del Docente</h1>
+    {% if docente %}
+
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="../static/uploads/{{ docente[6] }}" class="img-fluid rounded-start" alt="Imagen docente">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ docente[1] }} {{ docente[2] }}</h5>
+                <p class="card-text">Documento: {{ docente[3] }}</p>
+                <p class="card-text">Correo electronico: {{ docente[4] }}</p>
+                <p class="card-text">Telefono: {{ docente[5] }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% else %}
+        <p>El docente no se encontró.</p>
+    {% endif %}
+    <p><a href="/docentes">Volver a la lista de Docentes</a></p>
+    
+</body>
+</html>

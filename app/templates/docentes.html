@@ -1,0 +1,57 @@
+{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Docentes</title>
+</head>
+<body>
+    <h1>Lista de Docentes</h1>
+    <script>
+        window.onload = function() {
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        alert("{{ message }}");
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        };
+    </script>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Documento</th>
+                <th>Correo Electronico</th>
+                <th>NumCel</th>
+                <th>Imagen</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for docente in docentes %}
+            <tr>
+                <td>{{ docente[0] }}</td>
+                <td>{{ docente[1] }}</td>
+                <td>{{ docente[2] }}</td>
+                <td>{{ docente[3] }}</td>
+                <td>{{ docente[4] }}</td>
+                <td>{{ docente[5] }}</td>
+                <td><img src="static/uploads/{{ docente[6] }}" alt="Imagen del docente" style="max-width: 50px;"></td>
+                <td>
+                    <a class="btn btn-primary" href="/docentes/{{ docente[0] }}">Detalles</a> 
+                    <a class="btn btn-warning" href="/docentes/edit/{{ docente[0] }}">Editar</a> 
+                    <form action="/docentes/delete/{{ docente[0] }}" method="post" style="display: inline;">
+                        <input class="btn btn-danger" type="submit" value="Eliminar">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><a href="/docentes/add">Agregar Docente</a></p>
+</body>
+</html>
